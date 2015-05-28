@@ -1,7 +1,7 @@
 
 class SudukoSolver
   def self.solve(puzzle)
-    solution = backtracking_solver(puzzle)
+    backtracking_solver(puzzle)
   end
 
   def self.with_first_empty_cell(position)
@@ -45,45 +45,37 @@ class SudukoSolver
 
   def self.validate_column(position)
     (0..8).each do |col|
-      values = []
-      (0..8).each do |row|
-        if position[row][col] != 0
-          return false if values.include? position[row][col]
-          values.push position[row][col]
-        end
+      (0..8).reduce({}) do |values, row|
+        cell = position[row][col]
+        return false if values[cell]
+        values[cell] = true if cell != 0
+        values
       end
     end
-    true
   end
 
   def self.validate_row(position)
     (0..8).each do |row|
-      values = []
-      (0..8).each do |col|
-        if position[row][col] != 0
-          return false if values.include? position[row][col]
-          values.push position[row][col]
-        end
+      (0..8).reduce({}) do |values, col|
+        cell = position[row][col]
+        return false if values[cell]
+        values[cell] = true if cell != 0
+        values
       end
     end
-    true
   end
 
   def self.validate_groups(position)
     (0..6).step(3) do |group_row|
       (0..6).step(3) do |group_col|
-        values = []
-        # puts "********* #{group_row}:#{group_col}"
-
+        values = {}
         (0..2).each do |row_offset|
           row = group_row + row_offset
           (0..2).each do |col_offset|
             col = group_col + col_offset
-            if position[row][col] != 0
-              # puts "#{row}:#{col} = #{position[row][col]}"
-              return false if values.include? position[row][col]
-              values.push position[row][col]
-            end
+            cell = position[row][col]
+            return false if values[cell]
+            values[cell] = true if cell != 0
           end
         end
       end

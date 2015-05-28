@@ -61,7 +61,7 @@ describe SudukoSolver do
   describe "#solve" do
     it 'solves suduko puzzles' do
       expect(described_class().solve(puzzle)).to eq(solution)
-      expect(described_class().solve(puzzle_no_fun)).to eq(puzzle_no_fun)
+      expect(described_class().solve(puzzle_no_fun)).to eq(no_fun_solution)
     end
   end
 
