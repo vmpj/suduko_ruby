@@ -1,8 +1,8 @@
 # Introduction
 
-A simple implementation of ruby suduko solver using the [backtracking algorithm](https://en.wikipedia.org/wiki/Sudoku_solving_algorithms#Backtracking).
+A simple implementation of ruby Suduko solver using the [backtracking algorithm](https://en.wikipedia.org/wiki/Sudoku_solving_algorithms#Backtracking).
 
-The algoritm is implemented as a class in `suduko_solver.rb`. It was tested with the *No Fun* example from [this site](http://dingo.sbs.arizona.edu/~Sandiway/sudoku/examples.html)
+The algorithm is implemented as a class in `suduko_solver.rb`. It was tested with the *No Fun* example from [this site](http://dingo.sbs.arizona.edu/~Sandiway/sudoku/examples.html)
 
 # Example Usage
 
