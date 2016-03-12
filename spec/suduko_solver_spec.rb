@@ -1,7 +1,7 @@
 require 'rspec'
 require './suduko_solver'
 
-describe SudukoSolver do
+describe Suduko::SudukoSolver do
 
   let(:puzzle) do
     Array[[3, 0, 6, 5, 0, 8, 4, 0, 0],
@@ -67,7 +67,7 @@ describe SudukoSolver do
 
   describe "#backtracking_solver" do
     context 'when given a completed puzzle' do
-      subject { SudukoSolver.backtracking_solver(solution) }
+      subject { Suduko::SudukoSolver.backtracking_solver(solution) }
       it { is_expected.to eq(solution) }
     end
 
@@ -77,7 +77,7 @@ describe SudukoSolver do
         m[0][0] = 0
         m
       end
-      subject { SudukoSolver.backtracking_solver(oneblank) }
+      subject { Suduko::SudukoSolver.backtracking_solver(oneblank) }
       it { is_expected.to eq(solution) }
     end
 
@@ -88,7 +88,7 @@ describe SudukoSolver do
         m[0][1] = 0
         m
       end
-      subject { SudukoSolver.backtracking_solver(twoblank) }
+      subject { Suduko::SudukoSolver.backtracking_solver(twoblank) }
       it { is_expected.to eq(solution) }
     end
 
@@ -98,14 +98,14 @@ describe SudukoSolver do
         m[4][5] = 0
         m
       end
-      subject { SudukoSolver.backtracking_solver(unsolvable) }
+      subject { Suduko::SudukoSolver.backtracking_solver(unsolvable) }
       it { is_expected.to eq(false) }
     end
   end
 
   describe "#validate" do
     context 'when given a validate position' do
-      subject { SudukoSolver.validate(puzzle) }
+      subject { Suduko::SudukoSolver.validate(puzzle) }
       it { is_expected.to be_truthy }
     end
 
@@ -118,7 +118,7 @@ describe SudukoSolver do
         m
       end
 
-      subject { SudukoSolver.validate(invalid_column) }
+      subject { Suduko::SudukoSolver.validate(invalid_column) }
       it { is_expected.to be_falsey }
     end
 
@@ -131,7 +131,7 @@ describe SudukoSolver do
         m
       end
 
-      subject { SudukoSolver.validate(invalid_row) }
+      subject { Suduko::SudukoSolver.validate(invalid_row) }
       it { is_expected.to be_falsey }
     end
 
@@ -144,7 +144,7 @@ describe SudukoSolver do
           m
         end
 
-        subject { SudukoSolver.validate(invalid_group0) }
+        subject { Suduko::SudukoSolver.validate(invalid_group0) }
         it { is_expected.to be_falsey }
       end
 
@@ -156,7 +156,7 @@ describe SudukoSolver do
           m
         end
 
-        subject { SudukoSolver.validate(invalid_group8) }
+        subject { Suduko::SudukoSolver.validate(invalid_group8) }
         it { is_expected.to be_falsey }
       end
     end
@@ -165,12 +165,12 @@ describe SudukoSolver do
   describe "#done" do
 
     context 'when given a position with one empty cell' do
-      subject { SudukoSolver.done(one_empty_cell) }
+      subject { Suduko::SudukoSolver.done(one_empty_cell) }
       it { is_expected.to be_falsey }
     end
 
     context 'when given a position with no empty cells' do
-      subject { SudukoSolver.done(solution) }
+      subject { Suduko::SudukoSolver.done(solution) }
       it { is_expected.to be_truthy }
     end
   end
@@ -178,13 +178,13 @@ describe SudukoSolver do
 
   describe "#with_empty_cell" do
     context 'when given a position with one empty cell' do
-      specify { expect { |b| SudukoSolver.with_first_empty_cell(one_empty_cell, &b) }.to yield_with_args(4, 5) }
+      specify { expect { |b| Suduko::SudukoSolver.with_first_empty_cell(one_empty_cell, &b) }.to yield_with_args(4, 5) }
     end
     context 'when given a position with no empty cells' do
       let(:no_empty_cells) do
         Array.new(9) { Array.new(9, 1) }
       end
-      subject { SudukoSolver.with_first_empty_cell(no_empty_cells) }
+      subject { Suduko::SudukoSolver.with_first_empty_cell(no_empty_cells) }
       it { is_expected.to be_truthy }
     end
   end
